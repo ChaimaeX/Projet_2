@@ -5,23 +5,93 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Sharp:opsz,wght,FILL,GRAD@48,400,0,0" />
     <!-- link boostrap -->
-    <link src="{% static 'css/boostrap.css'%}">
+    <link  rel="stylesheet" href="{% static 'css/style.css'%}">
+    <link  rel="stylesheet" href="{% static 'css/boostrap.css'%}">
+    
 </head>
 <body>
     <div class="container">
+        <aside>
+             
+           <div class="top">
+             <div class="logo">
+               <h2>Mr <span class="danger">{{name}}</span> </h2>
+             </div>
+             <div class="close" id="close_btn">
+              <span class="material-symbols-sharp">
+                close
+                </span>
+             </div>
+           </div>
+           <!-- end top -->
+            <div class="sidebar">
+  
+              <a href="{% url 'Home' %}" class="nav-link" onclick="setActive(this)">
+                <span class="material-symbols-sharp">grid_view </span>
+                <h3>Dashbord</h3>
+             </a>
+             <a  href="{% url 'custumers' %}" class="nav-link" onclick="setActive(this)">
+                <span class="material-symbols-sharp">person_outline </span>
+                <h3>custumers</h3>
+             </a>
+             <a  href="{% static 'Messages' %}" class="nav-link" onclick="setActive(this)">
+                <span class="material-symbols-sharp">mail_outline </span>
+                <h3>Messages</h3>
+                <span class="msg_count">14</span>
+             </a>
+             <a  href="{% url 'add' %}" class="nav-link" onclick="setActive(this)">
+                <span class="material-symbols-sharp">add </span>
+                <h3>Add Custumer</h3>
+             </a>
+             
+             <a href="{% url 'user-logout'%}" class="nav-link" onclick="setActive(this)">
+                <span class="material-symbols-sharp">logout </span>
+                <h3>logout</h3>
+             </a>
+               
+  
+  
+            </div>
+  
+        </aside>
+          <!----------------- message block ---------------------------->
+          <!-- <div class="container">
+            <div class="wrapper">
+              <br>
+              {% for message in messages %}
+              <div class="alert {{message.tags}} alert-dismissible" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+                {{ message|safe }}
+              </div>
+              {% endfor %}
+            </div>
+          </div>  -->
     {% block content %}
 
 
     {% endblock content %}
-    </div>
+  
+    <script>
+        function setActive(element) {
+        // Retire la classe 'active' de tous les liens
+        var links = document.querySelectorAll('.sidebar a');
+        links.forEach(link => link.classList.remove('active'));
+      
+        // Ajoute la classe 'active' au lien cliqué
+        element.classList.add('active');
+        }
+    </script>
 
     
-
+    
     <script src="{% static 'js/boostrap.js'%}"></script>
     <script src="{% static 'js/jquery-3.7.1.min.js'%}"></script>
     <script src="{% static 'js/popper.min.js'%}"></script>
-    <script src="{% static'boostrap.bundle.min.js'%}"></script>
+    <script src="{% static  'boostrap.bundle.min.js'%}"></script>
 </body>
 
 </html>
